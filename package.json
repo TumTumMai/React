@@ -1,0 +1,74 @@
+{
+  "name": "funch-web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.22",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "axios": "^0.25.0",
+    "env-cmd": "^10.1.0",
+    "moment": "^2.29.1",
+    "react": "^17.0.2",
+    "react-big-calendar": "^0.38.7",
+    "react-cookie": "^4.1.1",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "typescript": "^4.5.5",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "startdev": "react-scripts start",
+    "start": "env-cmd -f .env.production react-scripts start",
+    "build": "env-cmd -f .env.production react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "check-types": "tsc --pretty --noEmit",
+    "check-format": "prettier --check .",
+    "format": "prettier --write .",
+    "check-lint": "eslint src/* --ext ts --ext tsx --ext js",
+    "format-lint": "eslint src/* --fix",
+    "test-all": "npm run format && npm run check-format && npm run check-lint && npm run check-types && npm run build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-big-calendar": "^0.36.2",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "autoprefixer": "^10.4.2",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4",
+    "postcss": "^8.4.6",
+    "prettier": "2.5.1",
+    "tailwindcss": "^3.0.18"
+  }
+}
