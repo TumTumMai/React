@@ -57,6 +57,7 @@ const GoogleAuthCallback: React.FC = () => {
         .then((res) => {
           const data = JSON.stringify(res.data);
           const datatoken = JSON.stringify(res.data.jwt).replaceAll(`"`, "");
+
           console.log(data);
 
           console.log(datatoken);
@@ -64,22 +65,38 @@ const GoogleAuthCallback: React.FC = () => {
           // alert("aaa");
         });
       await axios
-        .get(`${url}/api/auths`, {
+        .get(`${url}/api/users/me`, {
           headers: {
             Authorization: "Bearer " + jwt.datatoken
           }
         })
         .then((res) => {
-          //   localStorage.setItem("datalocalstorage", jwt.data);
+          const checkdata = res.data.title;
+          const chekrole = res.data.role.name;
+
+          // localStorage.setItem("datalocalstorage", jwt.data);
           //   setcookie("datacookie", jwt.datatoken);
-          alert("Login Sucsess");
-          router("/Hello");
+          console.log(chekrole);
+          const allData = {
+            ...res.data,
+            jwt: jwt.datatoken
+          };
+          if (chekrole === "Member" || checkdata === "-") {
+            localStorage.setItem("datalocalstorage", JSON.stringify(allData));
+          }
+          if (chekrole === "Member") {
+            router("/Test");
+          } else if (checkdata === "-") {
+            router("/FormRegister");
+          } else {
+            alert("รอแอดมินอนุมัด");
+            router("/");
+          }
           return res;
         })
         .catch(() => {
-          alert("เเจ้งแอดมิน");
-          router("/");
-
+          alert("LoginFl");
+          // router("/FormRegister");
           // setIsAuth(false);
         });
     }

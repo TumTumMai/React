@@ -7,7 +7,7 @@ const Home: React.FunctionComponent = () => {
   console.log(process.env.REACT_APP_TEST);
   return (
     <header className="App-header">
-      {/* <img src={logo} alt="logo" /> */}
+      <img src={logo} alt="logo" />
       {/* <p>
         Edit <code>src/App.tsx</code> and save to reload.
       </p> */}

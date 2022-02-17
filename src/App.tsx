@@ -3,9 +3,10 @@ import React from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import GoogleAuthCallback from "./GoogleAuth/GoogleAuthCallback";
-import Test from "./components/New";
+import Test from "./components/Calendar";
 import Home from "./components/Home";
 import Hello from "./components/Hello";
+import Register from "./components/FormRegister";
 
 function App(): JSX.Element {
   return (
@@ -18,6 +19,9 @@ function App(): JSX.Element {
         <Route path="/Test" element={<Test />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="/Hello" element={<Hello />}></Route>
+        <Route path="/Calenda" element={<Test />}></Route>
+
+        <Route path="/FormRegister" element={<Register />}></Route>
       </Routes>
     </div>
   );
