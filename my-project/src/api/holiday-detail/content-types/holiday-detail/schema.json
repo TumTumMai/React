@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "holiday_details",
+  "info": {
+    "singularName": "holiday-detail",
+    "pluralName": "holiday-details",
+    "displayName": "Holiday-details",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Start_holiday_year": {
+      "type": "date"
+    },
+    "End_holiday_year": {
+      "type": "date"
+    },
+    "Holidays": {
+      "type": "component",
+      "repeatable": true,
+      "component": "holidays.holiday"
+    }
+  }
+}

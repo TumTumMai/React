@@ -1,58 +1,50 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
 import * as React from "react";
 // import { useNavigate } from "react-router-dom";
-import { ICalendaData, IHoliday } from "../models/holiday";
+import { ICalendaData, IHoliday } from "../models/holiday.api/holiday";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import Navbar from "./Navbar";
-import { IUser } from "../models/user";
+// import Navbar from "./Navbar";
+// import { IUser } from "../models/user";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import api from "../constants/api";
+import { useSelector } from "react-redux";
+import { IAllReducers } from "redux/store";
+import Navbar from "components/Navbar/index";
+import Container from "components/ContainerContent";
+import { ILeaveDay } from "models/leave.api/leave.approve";
+// import { ILeave } from "models/leave.api";
+
 // import axios from "axios";
 // import { useState, useEffect } from "react";
 const localizer = momentLocalizer(moment);
-// const calendarStyle = (): void => {
-//   return {
-//     style: {
-//       backgroundColor: "#dcfce7"
-//     }
-//   };
-// };
 
 // interface ITestProps {}
-const Test: React.FunctionComponent = () => {
-  const userstr = localStorage.getItem("datalocalstorage");
-  const user = JSON.parse(userstr!) as IUser;
-  const router = useNavigate();
-  const handleLogout = (): void => {
-    localStorage.removeItem("datalocalstorage");
-    if (localStorage.getItem("datalocalstorage") == null) {
-      router("/");
-    } else {
-      alert("aaa");
-    }
-  };
+const CalendarHoliday: React.FunctionComponent = () => {
+  const auth = useSelector((state: IAllReducers) => state.auth);
 
-  const [holiday, setHoliday] = useState<ICalendaData[]>();
+  const [Calendars, setCalendar] = useState<ICalendaData[]>();
   useEffect(() => {
     const getHoliday = (): Promise<ICalendaData[]> => {
-      const url = process.env.REACT_APP_API;
+      // const url = process.env.REACT_APP_API;
 
       return axios
-        .get<IHoliday>(`${url}/api/holiday-details?populate=Holidays`, {
+        .get<IHoliday>(`${api.getHolidays}`, {
           headers: {
-            Authorization: "Bearer " + user.jwt
+            Authorization: "Bearer " + auth.token
           }
         })
         .then((res) => {
           // console.log(res);
           const calendaDatas = res.data.data.map((e) => {
             return e.attributes.Holidays.map((h) => {
-              console.log(h);
+              // console.log(h);
 
               const item: ICalendaData = {
                 title: h.title,
@@ -69,9 +61,34 @@ const Test: React.FunctionComponent = () => {
         .catch();
     };
 
-    getHoliday().then((res) => {
-      console.log(res);
-      setHoliday(res);
+    let data: ICalendaData[] = [];
+    getHoliday().then((aaa) => {
+      // console.log(res);
+      axios
+        .get<ILeaveDay>(`${api.getLeaveDetailByApprove}`, {
+          headers: {
+            Authorization: "Bearer " + auth.token
+          }
+        })
+        .then((res) => {
+          data = res.data.data.map((l) => {
+            return {
+              title: l.attributes.title,
+              start: new Date(l.attributes.startDate),
+              end: new Date(l.attributes.endDate)
+            };
+          });
+          const allData = data.concat(aaa);
+
+          console.log(allData);
+
+          setCalendar(allData);
+
+          // console.log(data);
+        });
+
+      // console.log(aaa);
+      // setCalendar(aaa);
     });
     // console.log(ld)
 
@@ -80,36 +97,32 @@ const Test: React.FunctionComponent = () => {
 
   return (
     <>
-      <Navbar></Navbar>
-      {/* <div style={{ width: "100%", height: "70px" }}></div> */}
-      <div className="bg-green-100 ">
-        <Calendar
-          localizer={localizer}
-          events={holiday}
-          startAccessor="start"
-          endAccessor="end"
-          style={{
-            height: 600
-          }}
-          eventPropGetter={(event, start, end, isSelected) => ({
-            event,
-            start,
-            end,
-            isSelected,
-            style: { backgroundColor: "#ff3333" }
-          })}
-          // dayPropGetter={calendarStyle}
-        />
-      </div>
-      <button className=" hover:bg-green-600  " onClick={handleLogout}>
-        Logout
-      </button>
+      <Navbar>
+        <Container>
+          {/* <div style={{ width: "100%", height: "70px" }}></div> */}
+          <div className="bg-green-100 ">
+            <Calendar
+              localizer={localizer}
+              events={Calendars}
+              startAccessor="start"
+              endAccessor="end"
+              style={{
+                height: 600
+              }}
+              eventPropGetter={(event, start, end, isSelected) => ({
+                event,
+                start,
+                end,
+                isSelected,
+                style: { backgroundColor: "#ff3333" }
+              })}
+              // dayPropGetter={calendarStyle}
+            />
+          </div>
+        </Container>
+      </Navbar>
     </>
   );
 };
 
-// const Test: React.FunctionComponent = () => {
-//   return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
-// };
-
-export default Test;
+export default CalendarHoliday;

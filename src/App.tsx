@@ -1,30 +1,26 @@
-import React from "react";
-// import logo from "./logo.svg";
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import GoogleAuthCallback from "./GoogleAuth/GoogleAuthCallback";
-import Test from "./components/Calendar";
-import Home from "./components/Home";
-import Hello from "./components/Hello";
-import Register from "./components/FormRegister";
+import Pages, { IRoutes } from "constants/routes";
+import MiddlewareRotue from "middleware/route";
 
-function App(): JSX.Element {
+const App = (): JSX.Element => {
   return (
-    <div className="App">
+    <div className="App h-screen bg-gradient-to-br from-white to-slate-400">
       <Routes>
-        <Route
-          path="/api/auth/google/callback"
-          element={<GoogleAuthCallback />}
-        ></Route>
-        <Route path="/Test" element={<Test />}></Route>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/Hello" element={<Hello />}></Route>
-        <Route path="/Calenda" element={<Test />}></Route>
-
-        <Route path="/FormRegister" element={<Register />}></Route>
+        {!!Pages &&
+          Pages.map((item: IRoutes, index: number) => {
+            return (
+              <Route
+                key={index}
+                path={item.path}
+                element={<MiddlewareRotue {...item} />}
+              >
+                <Route path={item.path} element={item.element} />
+              </Route>
+            );
+          })}
       </Routes>
     </div>
   );
-}
+};
 
 export default App;

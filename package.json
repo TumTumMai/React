@@ -1,33 +1,35 @@
 {
-  "name": "funch-web",
+  "name": "ttt-ttt",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.0",
-    "@types/node": "^16.11.22",
-    "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "axios": "^0.25.0",
     "env-cmd": "^10.1.0",
+    "js-cookie": "^3.0.1",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-big-calendar": "^0.38.7",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.27.0",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "typescript": "^4.5.5",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "redux-typescript": "^1.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start:development": "react-scripts start",
     "start": "env-cmd -f .env.production react-scripts start",
     "build": "env-cmd -f .env.production react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "check-types": "tsc --pretty --noEmit",
@@ -39,7 +41,6 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
       "react-app/jest"
     ]
   },
@@ -56,11 +57,15 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.1",
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.39",
     "@types/react-big-calendar": "^0.36.2",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "autoprefixer": "^10.4.2",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
@@ -70,6 +75,11 @@
     "husky": "^7.0.4",
     "postcss": "^8.4.6",
     "prettier": "2.5.1",
-    "tailwindcss": "^3.0.18"
+    "tailwindcss": "^3.0.18",
+    "typescript": "^4.5.5"
+  },
+  "engines": {
+    "node": ">=14.x.x <=16.x.x",
+    "npm": ">=6.0.0"
   }
 }

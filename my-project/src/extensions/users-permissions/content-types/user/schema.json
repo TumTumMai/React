@@ -63,41 +63,76 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "Title": {
-      "type": "enumeration",
-      "enum": [
-        "Mr",
-        "Mrs",
-        "Ms"
-      ]
-    },
     "title": {
       "type": "string",
-      "default": "-"
+      "default": "-",
+      "required": true
     },
     "firstName": {
       "type": "string",
-      "default": "-"
+      "default": "-",
+      "required": true
     },
     "lastName": {
       "type": "string",
-      "default": "-"
+      "default": "-",
+      "required": true
     },
     "address": {
       "type": "text",
-      "default": "-"
+      "default": "-",
+      "required": true
     },
     "phoneNumber": {
       "type": "string",
+      "required": true,
       "default": "-"
+    },
+    "birthDate": {
+      "type": "date"
     },
     "identificationCard": {
       "type": "string",
+      "required": true,
       "default": "-"
     },
     "position": {
       "type": "string",
       "default": "-"
+    },
+    "salary": {
+      "type": "biginteger"
+    },
+    "vacationLeave": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "sickLeave": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "personalLeave": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "startingDate": {
+      "type": "date"
+    },
+    "registrationDate": {
+      "type": "date",
+      "required": false
+    },
+    "lastWorkingDate": {
+      "type": "date"
+    },
+    "leaveDetail": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::leave-detail.leave-detail",
+      "mappedBy": "user"
     }
   }
 }
