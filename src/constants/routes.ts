@@ -1,5 +1,5 @@
 import React from "react";
-import Information from "../pages/infomation";
+// import Information from "../pages/infomation";
 import Leave from "../pages/leave";
 import Login from "../pages/login";
 import ErrorPage from "../pages/error";
@@ -18,7 +18,7 @@ const pages: IRoutes[] = [
   {
     name: "information",
     path: "/",
-    element: Information,
+    element: CalendarHoliday,
     requestAuth: true,
     requestRole: "Member"
   },
@@ -42,16 +42,16 @@ const pages: IRoutes[] = [
     requestAuth: true,
     requestRole: "Review"
   },
-  {
-    name: "calendarHoliday",
-    path: "/calendar",
-    element: CalendarHoliday,
-    requestAuth: true,
-    requestRole: "Member"
-  },
+  // {
+  //   name: "calendarHoliday",
+  //   path: "/calendar",
+  //   element: CalendarHoliday,
+  //   requestAuth: true,
+  //   requestRole: "Member"
+  // },
   {
     name: "error",
-    path: "*",
+    path: "/404",
     element: ErrorPage,
     requestAuth: false
   }

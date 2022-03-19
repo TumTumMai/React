@@ -25,7 +25,8 @@ function authorization(
       return {
         loggedIn: false,
         token: null,
-        user: null
+        user: null,
+        error: action?.payload?.error
       };
     case AuthActionType.LOGOUT:
       return initialState;

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { IAllReducers } from "redux/store";
 import moment from "moment";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { IAllReducers } from "redux/store";
+import { LoadActionType } from "redux/loadReducers/type";
+import { Calendar, momentLocalizer } from "react-big-calendar";
 import Modal from "components/Modal";
 import api from "http/leave.api";
 import * as IApiLeave from "models/leave.api";
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import utils from "utils";
 
 interface IParamsSelectCarenda {
   start: string | Date;
@@ -24,30 +27,54 @@ export interface ILeave {
   allDay?: string;
 }
 
+interface IFormData {
+  title: string;
+}
+
 interface IProps {
-  leaveList?: IApiLeave.Find.IData[];
+  leaveList?: IApiLeave.IData[];
   leaveDayType: IApiLeave.LeaveDayType;
   setFetchData: React.Dispatch<React.SetStateAction<Date>>;
 }
 
 const Carendar: React.FC<IProps> = (props): JSX.Element => {
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [leaves, setLeaves] = useState<ILeave[]>([]);
   const [startDate, setStartDate] = useState<moment.Moment>();
   const [endDate, setEndDate] = useState<moment.Moment>();
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModalOverlap, setOpenModalOverlap] = useState<boolean>(false);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<IFormData>();
   const localizer = momentLocalizer(moment);
+  const dispatch = useDispatch();
   const auth = useSelector((state: IAllReducers) => state.auth);
 
   const handleSelect = ({ start, end }: IParamsSelectCarenda): void => {
-    const startDateMoment = moment(moment.utc(start).valueOf());
-    const endDateMoment = moment(moment.utc(end).valueOf());
+    const startDateMoment = utils.time.convertTimeToLocal(start);
+    const endDateMoment = utils.time
+      .convertTimeToLocal(end)
+      .subtract(1, "days");
 
-    setStartDate(startDateMoment);
-    setEndDate(endDateMoment);
-    setOpenModal(true);
+    const newEvent = {
+      startTime: startDateMoment.format(),
+      endTime: endDateMoment.format()
+    };
+    const overlap = utils.checkoverlap(newEvent, props.leaveList);
+
+    if (overlap) {
+      setOpenModalOverlap(true);
+    } else {
+      setStartDate(startDateMoment);
+      setEndDate(endDateMoment);
+      setOpenModal(true);
+    }
   };
 
   const onCloseModal = (): void => {
@@ -55,31 +82,39 @@ const Carendar: React.FC<IProps> = (props): JSX.Element => {
     setEndDate(undefined);
     setTitle("");
     setDescription("");
+    setErrorMessage("");
     setOpenModal(false);
+    setOpenModalOverlap(false);
   };
 
-  const onSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
-    event.preventDefault();
+  const onSubmit: SubmitHandler<any> = handleSubmit(async (): Promise<void> => {
+    dispatch({ type: LoadActionType.LOADING_ON });
+    setErrorMessage("");
 
-    if (auth?.user?.id && auth?.token) {
-      await api.createLeaveDetail({
+    if (auth?.user?.id && auth?.token && !!startDate && !!endDate) {
+      const res = await api.createLeaveDetail({
         title: title,
         description: description,
-        startDate: moment(startDate).format(),
-        endDate: moment(endDate).format(),
+        startDate: startDate.format(),
+        endDate: endDate.format(),
         leaveDayType: props.leaveDayType,
         userId: auth.user.id,
         token: auth.token
       });
 
-      // set value of trigger parent new fetch data
-      props.setFetchData(new Date());
-    }
+      setTimeout(() => {
+        dispatch({ type: LoadActionType.LOADING_OFF });
+      }, 100);
 
-    onCloseModal();
-  };
+      if (res?.data && res.data !== null) {
+        onCloseModal();
+        // set value of trigger parent new fetch data
+        props.setFetchData(new Date());
+      } else if (res?.error) {
+        setErrorMessage(utils.setMessageError(res.error));
+      }
+    }
+  });
 
   useEffect((): void => {
     if (props?.leaveList && props.leaveList.length > 0) {
@@ -98,8 +133,8 @@ const Carendar: React.FC<IProps> = (props): JSX.Element => {
         return {
           id: item.id,
           title: item.attributes.title,
-          start: moment(moment.utc(item.attributes.startDate).valueOf()),
-          end: moment(moment.utc(item.attributes.endDate).valueOf()),
+          start: utils.time.convertTimeToLocal(item.attributes.startDate),
+          end: utils.time.convertTimeToLocal(item.attributes.endDate),
           color: color,
           type: "leave",
           allDay: "true"
@@ -114,18 +149,31 @@ const Carendar: React.FC<IProps> = (props): JSX.Element => {
     <>
       <Calendar
         selectable
+        views={["month"]}
         events={leaves}
         localizer={localizer}
-        startAccessor="start"
-        endAccessor="end"
         defaultDate={moment().toDate()}
         onSelectSlot={handleSelect}
+        dayLayoutAlgorithm="no-overlap"
         eventPropGetter={(event) => {
-          const eventData = leaves.find((ot) => ot.id === event.id);
-          const backgroundColor = eventData && eventData.color;
-          return { style: { backgroundColor } };
+          if (!!leaves && leaves.length > 0) {
+            const eventData = leaves.find((ot) => ot.id === event.id);
+            const backgroundColor = eventData && eventData.color;
+            return { style: { backgroundColor } };
+          }
+          return {};
         }}
       />
+
+      <Modal
+        title={"Error"}
+        openModal={openModalOverlap}
+        onClickClose={onCloseModal}
+      >
+        <div className="flex flex-col p-6 space-y-6">
+          วันลาที่คุณเลือกได้มีการลาไว้แล้ว กรุณาเลือกวันหยุดใหม่
+        </div>
+      </Modal>
 
       <Modal
         title={"Create Leave Date"}
@@ -136,11 +184,15 @@ const Carendar: React.FC<IProps> = (props): JSX.Element => {
           <div className="flex flex-col">
             <label>Title</label>
             <input
+              {...register("title", { required: "Title is a required field" })}
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="border rounded-lg p-2"
+              className={`${
+                errors?.title ? "border-rose-600" : ""
+              } border rounded-lg p-2`}
             />
+            <p className="text-rose-600">{errors.title?.message}</p>
           </div>
           <div className="flex flex-col">
             <label>Description</label>
@@ -154,13 +206,18 @@ const Carendar: React.FC<IProps> = (props): JSX.Element => {
           <div className="flex flex-row justify-around">
             <div>
               <label>Start :</label>
-              {moment(startDate).format()}
+              {!!startDate && utils.time.setFomat(startDate)}
             </div>
             <div>
               <label>End :</label>
-              {moment(endDate).format()}
+              {!!endDate && utils.time.setFomat(endDate)}
             </div>
           </div>
+          {!!errorMessage && errorMessage.length > 0 && (
+            <div className="flex justify-center text-rose-600">
+              {errorMessage}
+            </div>
+          )}
           {/* <!-- Modal footer --> */}
           <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
             <button

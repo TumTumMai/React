@@ -9,7 +9,7 @@ interface ICardLeaveDayType {
 
 const CardLeaveDayType = (props: ICardLeaveDayType): JSX.Element => {
   const stylesNormal =
-    "bg-white hover:bg-indigo-600 cursor-pointer hover:text-white";
+    "bg-white hover:bg-indigo-600 cursor-pointer hover:text-white hover:transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300";
   const stylesActive = "text-white bg-indigo-600 cursor-default";
 
   const style = props.active ? stylesActive : stylesNormal;

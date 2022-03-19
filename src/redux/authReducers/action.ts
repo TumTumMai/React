@@ -9,24 +9,29 @@ export const getUser = async (
   jwt: string,
   dispatch: Dispatch<any>
 ): Promise<void> => {
-  const user = await api.getProfile({ jwt });
+  const res = await api.getProfile({ jwt });
 
-  if (!!user && user !== undefined) {
+  if (!!res && res?.user !== undefined) {
     const payload = {
       loggedIn: true,
       token: jwt,
-      user: user
+      user: res.user
     };
 
-    Cookies.set("user", JSON.stringify({ token: payload.token, user: user }));
+    if (res.user.role.name !== "Review") {
+      Cookies.set("user", JSON.stringify({ token: payload.token, user: res }));
+    }
 
     dispatch({
       type: AuthActionType.LOGIN_SUCCESS,
       payload: payload
     });
   } else {
+    const payload = {
+      error: res.error
+    };
     Cookies.remove("user");
-    dispatch({ type: AuthActionType.LOGIN_FAILURE });
+    dispatch({ type: AuthActionType.LOGIN_FAILURE, payload: payload });
   }
 };
 
@@ -35,15 +40,18 @@ export const loginCallback = async (
   dispatch: Dispatch<any>
 ): Promise<void> => {
   // Get jwt
+  const res = await api.loginCallback({ idToken });
 
-  const jwt = await api.loginCallback({ idToken });
-
-  if (!!jwt && jwt.length > 0) {
+  if (!!res && res?.jwt && res.jwt.length > 0) {
     // Get data user and role
-    await getUser(jwt, dispatch);
+    await getUser(res.jwt, dispatch);
   } else {
+    const payload = {
+      error: res
+    };
+
     Cookies.remove("user");
-    dispatch({ type: AuthActionType.LOGIN_FAILURE });
+    dispatch({ type: AuthActionType.LOGIN_FAILURE, payload: payload });
   }
 };
 

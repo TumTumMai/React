@@ -4,7 +4,11 @@ module.exports = {
     fontFamily: {
       cursive: ["cursive"]
     },
-    extend: {}
+    extend: {
+      colors: {
+        Wednesday: "#7CFC00"
+      }
+    }
   },
   plugins: []
 };

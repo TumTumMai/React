@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { IRoutes } from "constants/routes";
 import { IAllReducers } from "redux/store";
 import { getUser } from "redux/authReducers/action";
+import { AuthActionType } from "redux/authReducers/type";
 
 const Auth = (
   Element: JSX.Element | null,
@@ -54,8 +55,20 @@ const Auth = (
   } else if (props.path === "/login") {
     if (auth.loggedIn === true) {
       if (auth.user?.role.name === "Review") {
-        return <Navigate to="/register" />;
+        if (auth.user?.title === "-") {
+          return <Navigate to="/register" />;
+        }
+
+        const error = {
+          message: "waiting for admin approval",
+          name: "Unauthorized",
+          status: 401
+        };
+
+        dispatch({ type: AuthActionType.LOGIN_FAILURE, payload: { error } });
+        return <Navigate to="/login" />;
       }
+
       return <Navigate to="/" />;
     } else if (auth.loggedIn === false || Cookies.get("user") === undefined) {
       return Element;

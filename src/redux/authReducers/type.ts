@@ -1,4 +1,5 @@
 import { IUser } from "models/login.api";
+import { IError } from "models/api";
 
 export interface IAction {
   type: AuthActionType;
@@ -6,13 +7,14 @@ export interface IAction {
 }
 
 export enum AuthActionType {
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT
+  LOGIN_SUCCESS = "LOGIN_SUCCESS",
+  LOGIN_FAILURE = "LOGIN_FAILURE",
+  LOGOUT = "LOGOUT"
 }
 
 export interface IAuthReducers {
   loggedIn: boolean | null;
   token: string | null;
   user: IUser | null;
+  error?: IError;
 }

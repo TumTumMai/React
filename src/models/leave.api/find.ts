@@ -1,4 +1,5 @@
-import { LeaveDayType, ILeave } from "./index";
+import { IError, IMeta } from "../api";
+import { LeaveDayType, IData } from "./index";
 
 export interface IParams {
   userId?: number;
@@ -9,20 +10,7 @@ export interface IParams {
 
 // interface return data
 export interface IFind {
-  data: IData[] | [];
-  meta: IPagination;
-}
-
-export interface IData {
-  id: number;
-  attributes: ILeave;
-}
-
-export interface IPagination {
-  pagination: {
-    page: number;
-    pageCount: number;
-    pageSize: number;
-    total: number;
-  };
+  data: IData[] | [] | null;
+  meta?: IMeta;
+  error?: IError;
 }

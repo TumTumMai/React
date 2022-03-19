@@ -1,6 +1,7 @@
 import { IUser } from "../login.api";
 import * as Create from "./create";
 import * as Find from "./find";
+import * as Update from "./update";
 
 export type LeaveDayType = "vacation_leave" | "sick_leave" | "personal_leave";
 export type LeaveDayStatusType = "waiting" | "cancel" | "approve";
@@ -15,4 +16,9 @@ export interface ILeave {
   user: IUser;
 }
 
-export { Create, Find };
+export interface IData {
+  id: number;
+  attributes: ILeave;
+}
+
+export { Create, Find, Update };

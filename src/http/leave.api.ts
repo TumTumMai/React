@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import http from "./index";
 import api from "../constants/api";
-import { Create, Find } from "../models/leave.api";
+import utils from "utils";
+import { Create, Find, Update, IData } from "../models/leave.api";
 
 const leaveApi = {
   findLeaveDetailByIdUser: async (props: Find.IParams): Promise<Find.IFind> => {
@@ -26,12 +27,23 @@ const leaveApi = {
 
       const res = await http.get(url);
 
+      res.data.data = res.data.data?.map((item: IData) => {
+        item.attributes.startDate = utils.time
+          .convertTimeToLocal(item.attributes.startDate)
+          .format();
+        item.attributes.endDate = utils.time
+          .convertTimeToLocal(item.attributes.endDate)
+          .format();
+
+        return item;
+      });
+
       return res.data;
     } catch (e: any) {
-      throw new Error(e);
+      return e.response.data;
     }
   },
-  createLeaveDetail: async (props: Create.IParams): Promise<any> => {
+  createLeaveDetail: async (props: Create.IParams): Promise<Create.ICreate> => {
     try {
       const url = api.leaveDetails;
       const headers = {
@@ -43,15 +55,51 @@ const leaveApi = {
         leaveDayType: props.leaveDayType,
         description: props.description,
         status: "waiting",
-        startDate: props.startDate,
-        endDate: props.endDate,
+        startDate: utils.time.convertTimeToUTC(props.startDate).format(),
+        endDate: utils.time.convertTimeToUTC(props.endDate).format(),
         userId: props.userId
       };
 
       const res = await http.post(url, { data: body }, { headers });
+      res.data.data.attributes.startDate = utils.time
+        .convertTimeToLocal(res.data.data.attributes.startDate)
+        .format();
+      res.data.data.attributes.endDate = utils.time
+        .convertTimeToLocal(res.data.data.attributes.endDate)
+        .format();
+
       return res.data;
     } catch (e: any) {
-      throw new Error(e);
+      return e.response.data;
+    }
+  },
+  updateLeaveDetail: async (props: Update.IParams): Promise<Update.IUpdate> => {
+    try {
+      const url = api.leaveDetails + `/${props.id}`;
+      const headers = {
+        Authorization: "Bearer " + props.token
+      };
+
+      const body: Update.IBody = {
+        title: props.title,
+        description: props.description,
+        status: props.status,
+        startDate: utils.time.convertTimeToUTC(props.startDate).format(),
+        endDate: utils.time.convertTimeToUTC(props.endDate).format(),
+        userId: props.userId
+      };
+
+      const res = await http.put(url, { data: body }, { headers });
+      res.data.data.attributes.startDate = utils.time
+        .convertTimeToLocal(res.data.data.attributes.startDate)
+        .format();
+      res.data.data.attributes.endDate = utils.time
+        .convertTimeToLocal(res.data.data.attributes.endDate)
+        .format();
+
+      return res.data;
+    } catch (e: any) {
+      return e.response.data;
     }
   }
 };

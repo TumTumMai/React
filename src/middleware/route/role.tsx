@@ -13,7 +13,7 @@ const Role = (props: IRoutes): JSX.Element | null => {
       auth?.user?.role?.name &&
       auth.user.role.name !== props.requestRole
     ) {
-      return <Navigate to="*" />;
+      return <Navigate to="/404" />;
     } else {
       return null;
     }

@@ -1,9 +1,20 @@
+import { IError } from "../api";
 export interface IPramasGetProfile {
   jwt: string;
 }
 
 export interface IPramasLoginCallback {
   idToken: string;
+}
+
+export interface IGetProFile {
+  user?: IUser;
+  error?: IError;
+}
+export interface ICallback {
+  jwt?: string;
+  user?: IUser;
+  error?: IError;
 }
 export interface IUser {
   id: number;
@@ -29,6 +40,6 @@ export interface IUser {
 
 export interface IRole {
   id: number;
-  name: string;
+  name: "Review" | "Member";
   type: string;
 }

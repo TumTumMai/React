@@ -1,18 +1,15 @@
-const { ForbiddenError, ApplicationError } = require("@strapi/utils").errors;
+const { PolicyError, ValidationError } = require("@strapi/utils").errors;
 const moment = require("moment");
 
 module.exports = {
   async beforeUpdate(event) {
     const { data, where, select, populate } = event.params;
-    const userId = data.user;
-    const { id } = where;
     const { startDate, endDate, status, leaveDayType, publishedAt } = data;
-    var leaveDate = 0;
+    const { id } = where;
 
-    // update data public but is not update data
-    if (!!publishedAt || publishedAt === null) {
-      return;
-    }
+    // data.user is value belongs to content-manager and data.userId is value belongs to custom api
+    const userId = data.user ? data.user : data.userId;
+    var leaveDate = 0;
 
     //get leaveDetail before update
     const leaveDetail = await strapi.db
@@ -28,7 +25,7 @@ module.exports = {
         where: { id: userId },
       });
     if (!user) {
-      throw new ForbiddenError("user is empty");
+      throw new ValidationError("user is empty");
     }
 
     // check startDate & endDate
@@ -49,7 +46,6 @@ module.exports = {
     }
 
     // check status leaveDetail
-    console.log(status, leaveDetail.status);
     if (status !== leaveDetail.status) {
       var dataUpdate = {};
       if (status === "approve") {
@@ -73,10 +69,10 @@ module.exports = {
             data: dataUpdate,
           });
         } else {
-          throw new ForbiddenError("Transaction error");
+          throw new PolicyError("Transaction error");
         }
       } else {
-        throw new ForbiddenError(
+        throw new PolicyError(
           "The transaction has been confirmed. Please make a new transaction."
         );
       }

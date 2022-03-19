@@ -128,10 +128,16 @@
     "lastWorkingDate": {
       "type": "date"
     },
-    "leaveDetail": {
+    "leaveDetails": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::leave-detail.leave-detail",
+      "mappedBy": "user"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-detail.blog-detail",
       "mappedBy": "user"
     }
   }

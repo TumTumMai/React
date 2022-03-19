@@ -1,38 +1,36 @@
+/* eslint-disable spaced-comment */
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
 import * as React from "react";
-// import { useNavigate } from "react-router-dom";
 import { ICalendaData, IHoliday } from "../models/holiday.api/holiday";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-// import Navbar from "./Navbar";
-// import { IUser } from "../models/user";
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjQ3NzAxMTUxLCJleHAiOjE2NTAyOTMxNTF9.iNVDQq6FmNTtO_-Iv-xQEVZrahwXfo-fFypX1WEa-HU
+
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import api from "../constants/api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IAllReducers } from "redux/store";
 import Navbar from "components/Navbar/index";
 import Container from "components/ContainerContent";
 import { ILeaveDay } from "models/leave.api/leave.approve";
-// import { ILeave } from "models/leave.api";
+import { LoadActionType } from "redux/loadReducers/type";
 
-// import axios from "axios";
-// import { useState, useEffect } from "react";
 const localizer = momentLocalizer(moment);
 
-// interface ITestProps {}
 const CalendarHoliday: React.FunctionComponent = () => {
   const auth = useSelector((state: IAllReducers) => state.auth);
+  const dispatch = useDispatch();
 
   const [Calendars, setCalendar] = useState<ICalendaData[]>();
   useEffect(() => {
     const getHoliday = (): Promise<ICalendaData[]> => {
-      // const url = process.env.REACT_APP_API;
+      dispatch({ type: LoadActionType.LOADING_ON });
 
       return axios
         .get<IHoliday>(`${api.getHolidays}`, {
@@ -41,11 +39,8 @@ const CalendarHoliday: React.FunctionComponent = () => {
           }
         })
         .then((res) => {
-          // console.log(res);
           const calendaDatas = res.data.data.map((e) => {
             return e.attributes.Holidays.map((h) => {
-              // console.log(h);
-
               const item: ICalendaData = {
                 title: h.title,
                 start: new Date(h.Start_holiday_year),
@@ -54,7 +49,6 @@ const CalendarHoliday: React.FunctionComponent = () => {
               return item;
             });
           });
-          // console.log(data)
           return calendaDatas.flat();
         })
 
@@ -63,7 +57,6 @@ const CalendarHoliday: React.FunctionComponent = () => {
 
     let data: ICalendaData[] = [];
     getHoliday().then((aaa) => {
-      // console.log(res);
       axios
         .get<ILeaveDay>(`${api.getLeaveDetailByApprove}`, {
           headers: {
@@ -82,17 +75,12 @@ const CalendarHoliday: React.FunctionComponent = () => {
 
           console.log(allData);
 
+          setTimeout(() => {
+            dispatch({ type: LoadActionType.LOADING_OFF });
+          }, 100);
           setCalendar(allData);
-
-          // console.log(data);
         });
-
-      // console.log(aaa);
-      // setCalendar(aaa);
     });
-    // console.log(ld)
-
-    // console.log(token)
   }, []);
 
   return (
