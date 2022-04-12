@@ -1,5 +1,5 @@
 {
-  "name": "ttt-ttt",
+  "name": "funch-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start:development": "react-scripts start",
+    "start:alpha": "env-cmd -f .env.alpha react-scripts start",
     "start": "env-cmd -f .env.production react-scripts start",
     "build": "env-cmd -f .env.production react-scripts build",
     "eject": "react-scripts eject",
@@ -35,8 +36,8 @@
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
     "format": "prettier --write .",
-    "check-lint": "eslint src/* --ext ts --ext tsx --ext js",
-    "format-lint": "eslint src/* --fix",
+    "check-lint": "eslint 'src/*' --ext ts --ext tsx --ext js",
+    "format-lint": "eslint 'src/*' --fix",
     "test-all": "npm run format && npm run check-format && npm run check-lint && npm run check-types && npm run build"
   },
   "eslintConfig": {
@@ -71,6 +72,7 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.28.0",
     "husky": "^7.0.4",

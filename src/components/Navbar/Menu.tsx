@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+/* eslint-disable quotes */
+import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
-const activeStyle = "font-semibold text-white bg-indigo-600 cursor-default";
-const normalStyle = "hover:bg-indigo-600 cursor-pointer hover:text-white";
+const activeStyle = 'font-semibold text-white bg-indigo-600 cursor-default';
+const normalStyle = 'hover:bg-indigo-600 cursor-pointer hover:text-white';
 
 export interface IMenu {
   path: string;

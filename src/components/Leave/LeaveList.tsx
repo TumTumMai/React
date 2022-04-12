@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
-import { IAllReducers } from "redux/store";
-import { LoadActionType } from "redux/loadReducers/type";
-import { useForm, SubmitHandler } from "react-hook-form";
-import Modal from "components/Modal";
-import * as IApiLeave from "models/leave.api";
-import api from "http/leave.api";
-import utils from "utils";
+/* eslint-disable quotes */
+import React, { useEffect, useState } from 'react';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAllReducers } from 'redux/store';
+import { LoadActionType } from 'redux/loadReducers/type';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import Modal from 'components/Modal';
+import * as IApiLeave from 'models/leave.api';
+import api from 'http/leave.api';
+import utils from 'utils';
 
 type PropsType = {
   leaveListAll?: IApiLeave.IData[];
@@ -19,10 +20,10 @@ interface IFormData {
 }
 
 const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [disable, setDisable] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>("");
-  const [status, setStatus] = useState<IApiLeave.LeaveDayStatusType>("waiting");
+  const [title, setTitle] = useState<string>('');
+  const [status, setStatus] = useState<IApiLeave.LeaveDayStatusType>('waiting');
   const [description, setDescription] = useState<string>(
     props.attributes.description
   );
@@ -42,27 +43,27 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
   const dispatch = useDispatch();
   const auth = useSelector((state: IAllReducers) => state.auth);
 
-  const styleWatting = "border-yellow-600";
-  const styleCancle = "border-red-600";
-  const styleApprove = "border-lime-600";
+  const styleWatting = 'border-yellow-600';
+  const styleCancle = 'border-red-600';
+  const styleApprove = 'border-lime-600';
   const style = {
-    status: "",
-    button: ""
+    status: '',
+    button: ''
   };
 
   // set style status
-  if (props.attributes.status === "waiting") {
+  if (props.attributes.status === 'waiting') {
     style.status = styleWatting;
-  } else if (props.attributes.status === "cancel") {
+  } else if (props.attributes.status === 'cancel') {
     style.status = styleCancle;
   } else {
     style.status = styleApprove;
   }
 
   // set style button
-  if (props.attributes.status === "waiting") {
+  if (props.attributes.status === 'waiting') {
     style.button =
-      "hover:transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer";
+      'hover:transition ease-in-out delay-0 hover:-translate-y-1 hover:scale-110 duration-300 cursor-pointer';
   }
 
   const onClick = (): void => {
@@ -70,7 +71,7 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
   };
 
   const onSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-    if (e.target.value === "waiting" || e.target.value === "cancel") {
+    if (e.target.value === 'waiting' || e.target.value === 'cancel') {
       setStatus(e.target.value);
     }
   };
@@ -82,12 +83,12 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
     setStartDate(moment(props.attributes.startDate));
     setEndDate(moment(props.attributes.endDate));
     setOpenModal(false);
-    setErrorMessage("");
+    setErrorMessage('');
   };
 
   const onSubmit: SubmitHandler<any> = handleSubmit(async (): Promise<void> => {
     dispatch({ type: LoadActionType.LOADING_ON });
-    setErrorMessage("");
+    setErrorMessage('');
 
     const newEvent = {
       startTime: startDate.format(),
@@ -128,7 +129,7 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
       }
     } else {
       setErrorMessage(
-        "วันลาที่คุณเลือกได้มีการลาไว้แล้ว กรุณาเลือกวันหยุดใหม่"
+        'วันลาที่คุณเลือกได้มีการลาไว้แล้ว กรุณาเลือกวันหยุดใหม่'
       );
 
       setTimeout(() => {
@@ -138,7 +139,7 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
   });
 
   useEffect(() => {
-    if (props.attributes.status !== "waiting") {
+    if (props.attributes.status !== 'waiting') {
       setDisable(true);
     } else {
       setDisable(false);
@@ -167,10 +168,10 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
       >
         <div className="w-9/12">
           <div className="text-2xl font-bold text-left">
-            {props.id} {props.attributes.title}
+            {props.attributes.title}
           </div>
           <p className="text-zinc-500 h-6 truncate text-left">
-            {props.attributes.description}{" "}
+            {props.attributes.description}{' '}
           </p>
           <div className="mt-4">
             {`${utils.time.setFomat(
@@ -185,27 +186,27 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
         <div className="w-3/12 flex justify-end">
           <div
             className={
-              "flex justify-center items-center text-sm rounded-full border-solid border-4 " +
+              'flex justify-center items-center text-sm rounded-full border-solid border-4 ' +
               style.status
             }
-            style={{ width: "65px", height: "65px" }}
+            style={{ width: '65px', height: '65px' }}
           >
             {props.attributes.status}
           </div>
         </div>
       </button>
-      <Modal title={"Update"} openModal={openModal} onClickClose={onCloseModal}>
+      <Modal title={'Update'} openModal={openModal} onClickClose={onCloseModal}>
         <form className="flex flex-col p-6 space-y-6" onSubmit={onSubmit}>
           <div className="flex flex-col">
             <label>Title</label>
 
             <input
-              {...register("title", { required: "Title is a required field" })}
+              {...register('title', { required: 'Title is a required field' })}
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               className={`${
-                errors?.title ? "border-rose-600" : ""
+                errors?.title ? 'border-rose-600' : ''
               } border rounded-lg p-2`}
             />
 
@@ -251,7 +252,7 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
               <label>Start :</label>
               <input
                 type="date"
-                value={startDate.format("YYYY-MM-DD")}
+                value={startDate.format('YYYY-MM-DD')}
                 onChange={(e) =>
                   setStartDate(utils.time.convertTimeToLocal(e.target.value))
                 }
@@ -261,7 +262,7 @@ const LeaveList: React.FC<PropsType> = (props): JSX.Element => {
               <label>End :</label>
               <input
                 type="date"
-                value={endDate.format("YYYY-MM-DD")}
+                value={endDate.format('YYYY-MM-DD')}
                 onChange={(e) =>
                   setEndDate(utils.time.convertTimeToLocal(e.target.value))
                 }

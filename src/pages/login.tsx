@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useCallback, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { IAllReducers } from "redux/store";
-import { LoadActionType } from "redux/loadReducers/type";
-import { loginCallback } from "../redux/authReducers/action";
-import api from "http/login.api";
-import { ICalendaData, IHoliday } from "models/holiday.api/holiday";
-import axios from "axios";
-import apicionstants from "../constants/api";
-import utils from "utils";
+/* eslint-disable quotes */
+import React, { useEffect, useCallback, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { IAllReducers } from 'redux/store';
+import { LoadActionType } from 'redux/loadReducers/type';
+import { loginCallback } from '../redux/authReducers/action';
+import api from 'http/login.api';
+import { ICalendaData, IHoliday } from 'models/holiday.api/holiday';
+import axios from 'axios';
+import apicionstants from '../constants/api';
+import utils from 'utils';
 
 const Login: React.FC = (): JSX.Element => {
   const location = useLocation();
@@ -75,17 +76,17 @@ const Login: React.FC = (): JSX.Element => {
               <div key={index} className="p-1 w-1/3">
                 <div
                   className={
-                    "py-6 px-14 rounded-lg  shadow-black-200 bg-white " +
+                    'py-6 px-14 rounded-lg  shadow-black-200 bg-white ' +
                     utils.setColordate(item.start)
                   }
                 >
                   <div>{item.title}</div>
 
                   <div>
-                    {" "}
-                    {item.start.toLocaleDateString("en-EN", {
-                      weekday: "long",
-                      day: "2-digit"
+                    {' '}
+                    {item.start.toLocaleDateString('en-EN', {
+                      weekday: 'long',
+                      day: '2-digit'
                       // formatMatcher: "month"
                     })}
                   </div>

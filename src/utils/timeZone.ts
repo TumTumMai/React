@@ -1,7 +1,8 @@
-import moment from "moment";
+/* eslint-disable quotes */
+import moment from 'moment';
 
 export const convertTimeToLocal = (time: string | Date): moment.Moment => {
-  return moment(time).add(7, "hours");
+  return moment(time).add(7, 'hours');
 };
 
 export const convertTimeToUTC = (time: string | Date): moment.Moment => {
@@ -9,5 +10,5 @@ export const convertTimeToUTC = (time: string | Date): moment.Moment => {
 };
 
 export const setFomat = (time: moment.Moment): string => {
-  return time.format("DD-MM-YYYY");
+  return time.format('DD-MM-YYYY');
 };

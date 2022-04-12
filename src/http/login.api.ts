@@ -1,18 +1,19 @@
-import http from "./index";
-import api from "../constants/api";
+/* eslint-disable quotes */
+import http from './index';
+import api from '../constants/api';
 import {
   IPramasGetProfile,
   IPramasLoginCallback,
   IGetProFile,
   ICallback
-} from "../models/login.api";
+} from '../models/login.api';
 
 const loginApi = {
   getProfile: async (props: IPramasGetProfile): Promise<IGetProFile> => {
     try {
       const user = await http.get(api.getProfile, {
         headers: {
-          Authorization: "Bearer " + props.jwt
+          Authorization: 'Bearer ' + props.jwt
         }
       });
 

@@ -1,5 +1,6 @@
-import Button from "./button";
-import Text from "./text";
+/* eslint-disable quotes */
+import Button from './button';
+import Text from './text';
 
 export interface IPagination {
   page: number;

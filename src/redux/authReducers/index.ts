@@ -1,4 +1,5 @@
-import { IAuthReducers, IAction, AuthActionType } from "./type";
+/* eslint-disable quotes */
+import { IAuthReducers, IAction, AuthActionType } from './type';
 
 const initialState: IAuthReducers = {
   loggedIn: null,

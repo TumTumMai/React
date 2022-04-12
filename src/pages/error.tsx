@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable quotes */
+import React from 'react';
 
 const Login: React.FC = (): JSX.Element => {
   return (

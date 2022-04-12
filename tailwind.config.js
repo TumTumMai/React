@@ -1,12 +1,12 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     fontFamily: {
-      cursive: ["cursive"]
+      cursive: ['cursive']
     },
     extend: {
       colors: {
-        Wednesday: "#7CFC00"
+        Wednesday: '#7CFC00'
       }
     }
   },

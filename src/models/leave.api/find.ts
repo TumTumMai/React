@@ -1,11 +1,16 @@
-import { IError, IMeta } from "../api";
-import { LeaveDayType, IData } from "./index";
+import { IError, IMeta } from '../api';
+import { LeaveDayType, LeaveDayStatusType, IData } from './index';
 
-export interface IParams {
+export interface IParamsFindById {
   userId?: number;
   page?: number;
   pageSize?: number;
   leaveDayType?: LeaveDayType;
+}
+
+export interface IParamsFind {
+  token?: string;
+  status?: LeaveDayStatusType;
 }
 
 // interface return data

@@ -1,6 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { IAllReducers } from "redux/store";
+/* eslint-disable quotes */
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { IAllReducers } from 'redux/store';
 
 const Load: React.FC = (): JSX.Element => {
   const loading = useSelector((state: IAllReducers) => state.loading);
@@ -8,7 +9,7 @@ const Load: React.FC = (): JSX.Element => {
   return (
     <div
       className={`${
-        loading.status ? "" : "hidden"
+        loading.status ? '' : 'hidden'
       } w-full h-full flex overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0 bg-neutral-900/[0.8]`}
     >
       <div className="flex w-16">

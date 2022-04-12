@@ -1,4 +1,5 @@
-export const DOTS = "...";
+/* eslint-disable quotes */
+export const DOTS = '...';
 
 const range = (start: number, end: number): (string | number)[] => {
   const length = end - start + 1;

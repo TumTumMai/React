@@ -1,4 +1,4 @@
-import { IError } from "../api";
+import { IError } from '../api';
 export interface IPramasGetProfile {
   jwt: string;
 }
@@ -28,9 +28,6 @@ export interface IUser {
   identificationCard: string;
   position: string;
   salary: number | null;
-  vacationLeave: number;
-  sickLeave: number;
-  personalLeave: number;
   startingDate: string | null;
   registrationDate: string | null;
   lastWorkingDate: string | null;
@@ -40,6 +37,6 @@ export interface IUser {
 
 export interface IRole {
   id: number;
-  name: "Review" | "Member";
+  name: 'Review' | 'Member';
   type: string;
 }

@@ -1,4 +1,5 @@
-import { IAction, ILoadReducers, LoadActionType } from "./type";
+/* eslint-disable quotes */
+import { IAction, ILoadReducers, LoadActionType } from './type';
 
 const initialState: ILoadReducers = {
   status: false

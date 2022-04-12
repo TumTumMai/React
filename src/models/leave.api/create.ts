@@ -1,5 +1,5 @@
-import { LeaveDayType, LeaveDayStatusType, IData } from "./index";
-import { IError, IMeta } from "../api";
+import { LeaveDayType, LeaveDayStatusType, IData } from './index';
+import { IError, IMeta } from '../api';
 
 export interface IParams {
   title: string;

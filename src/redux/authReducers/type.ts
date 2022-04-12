@@ -1,5 +1,6 @@
-import { IUser } from "models/login.api";
-import { IError } from "models/api";
+/* eslint-disable quotes */
+import { IUser } from 'models/login.api';
+import { IError } from 'models/api';
 
 export interface IAction {
   type: AuthActionType;
@@ -7,9 +8,9 @@ export interface IAction {
 }
 
 export enum AuthActionType {
-  LOGIN_SUCCESS = "LOGIN_SUCCESS",
-  LOGIN_FAILURE = "LOGIN_FAILURE",
-  LOGOUT = "LOGOUT"
+  LOGIN_SUCCESS = 'LOGIN_SUCCESS',
+  LOGIN_FAILURE = 'LOGIN_FAILURE',
+  LOGOUT = 'LOGOUT'
 }
 
 export interface IAuthReducers {

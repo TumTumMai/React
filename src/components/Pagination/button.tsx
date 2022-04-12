@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
-import utils from "utils";
-import { IPagination } from "./index";
+/* eslint-disable quotes */
+import React, { useMemo } from 'react';
+import utils from 'utils';
+import { IPagination } from './index';
 
 type PropsType = {
   onClick: React.Dispatch<React.SetStateAction<number>>;
@@ -11,11 +12,11 @@ const Button: React.FC<PropsType> = (props) => {
     const paginationRange = utils.pagination.setArray({ ...props });
     const Page = (): JSX.Element[] | undefined => {
       return paginationRange?.map((pageNumber, index) => {
-        if (typeof pageNumber === "number") {
+        if (typeof pageNumber === 'number') {
           const checkActive = props.page === pageNumber;
-          const activeStyle = "bg-indigo-50 border-indigo-500 text-indigo-600";
+          const activeStyle = 'bg-indigo-50 border-indigo-500 text-indigo-600';
           const normalStyle =
-            "bg-white border-gray-300 text-gray-500 hover:bg-gray-50";
+            'bg-white border-gray-300 text-gray-500 hover:bg-gray-50';
 
           return (
             <button

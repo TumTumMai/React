@@ -1,5 +1,6 @@
-import moment from "moment";
-import * as IApiLeave from "../models/leave.api";
+/* eslint-disable quotes */
+import moment from 'moment';
+import * as IApiLeave from '../models/leave.api';
 
 interface IEventToBeAdded {
   startTime: string | Date;
@@ -17,7 +18,7 @@ export const checkoverlap = (
       const startOldEvent = item.attributes.startDate;
       const endOldEvent = item.attributes.endDate;
 
-      if (item.attributes.status !== "cancel") {
+      if (item.attributes.status !== 'cancel') {
         if (
           moment(eventToBeAdded.startTime).isSame(startOldEvent) ||
           moment(eventToBeAdded.endTime).isSame(endOldEvent) ||

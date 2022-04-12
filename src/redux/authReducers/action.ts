@@ -1,9 +1,10 @@
+/* eslint-disable quotes */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Cookies from "js-cookie";
-import { Dispatch } from "redux";
-import api from "http/login.api";
+import Cookies from 'js-cookie';
+import { Dispatch } from 'redux';
+import api from 'http/login.api';
 
-import { IAction, AuthActionType } from "./type";
+import { IAction, AuthActionType } from './type';
 
 export const getUser = async (
   jwt: string,
@@ -18,8 +19,8 @@ export const getUser = async (
       user: res.user
     };
 
-    if (res.user.role.name !== "Review") {
-      Cookies.set("user", JSON.stringify({ token: payload.token, user: res }));
+    if (res.user.role.name !== 'Review') {
+      Cookies.set('user', JSON.stringify({ token: payload.token, user: res }));
     }
 
     dispatch({
@@ -30,7 +31,7 @@ export const getUser = async (
     const payload = {
       error: res.error
     };
-    Cookies.remove("user");
+    Cookies.remove('user');
     dispatch({ type: AuthActionType.LOGIN_FAILURE, payload: payload });
   }
 };
@@ -50,13 +51,13 @@ export const loginCallback = async (
       error: res
     };
 
-    Cookies.remove("user");
+    Cookies.remove('user');
     dispatch({ type: AuthActionType.LOGIN_FAILURE, payload: payload });
   }
 };
 
 export const logout = (): IAction => {
-  Cookies.remove("user");
+  Cookies.remove('user');
 
   return { type: AuthActionType.LOGOUT };
 };

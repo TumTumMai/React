@@ -1,34 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { IAllReducers } from "redux/store";
-import { LoadActionType } from "redux/loadReducers/type";
-import Navbar from "components/Navbar/index";
-import Container from "components/ContainerContent";
-import CardLeaveDayType from "components/Leave/CardLeaveDayType";
-import LeaveList from "components/Leave/LeaveList";
-import Carendar from "components/Leave/Calendar";
-import * as Pagination from "components/Pagination";
-import api from "http/leave.api";
-import * as IApi from "models/api";
-import * as IApiLeave from "models/leave.api";
-import utils from "utils";
+/* eslint-disable quotes */
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { IAllReducers } from 'redux/store';
+import { LoadActionType } from 'redux/loadReducers/type';
+import Navbar from 'components/Navbar/index';
+import Container from 'components/ContainerContent';
+import CardLeaveDayType from 'components/Leave/CardLeaveDayType';
+import LeaveList from 'components/Leave/LeaveList';
+import Carendar from 'components/Leave/Calendar';
+import * as Pagination from 'components/Pagination';
+import api from 'http/leave.api';
+import * as IApi from 'models/api';
+import * as IApiLeave from 'models/leave.api';
+import utils from 'utils';
 
 interface ILeave {
   type: IApiLeave.LeaveDayType;
   title: string;
-  date: number | undefined;
 }
 
 const Leave: React.FC = (): JSX.Element => {
-  const [errorMessageListAll, setErrorMessageListAll] = useState<string>("");
-  const [errorMessageList, setErrorMessageList] = useState<string>("");
+  const [errorMessageListAll, setErrorMessageListAll] = useState<string>('');
+  const [errorMessageList, setErrorMessageList] = useState<string>('');
   const [fetchData, setFetchData] = useState<Date>(new Date());
   const [page, setPage] = useState<number>(1);
   const [leaveList, setLeaveList] = useState<IApiLeave.IData[]>();
   const [leaveListAll, setLeaveListAll] = useState<IApiLeave.IData[]>();
   const [pagination, setPagination] = useState<IApi.IMeta | undefined>();
   const [leaveDayType, setLeaveDayType] =
-    useState<IApiLeave.LeaveDayType>("vacation_leave");
+    useState<IApiLeave.LeaveDayType>('vacation_leave');
 
   const dispatch = useDispatch();
   const auth = useSelector((state: IAllReducers) => state.auth);
@@ -54,7 +54,7 @@ const Leave: React.FC = (): JSX.Element => {
     if (!!listAll && listAll?.data && listAll?.meta) {
       setLeaveListAll(listAll.data);
       setPagination(list.meta);
-      setErrorMessageListAll("");
+      setErrorMessageListAll('');
     } else if (!!listAll && listAll?.error) {
       setLeaveListAll([]);
       setErrorMessageListAll(utils.setMessageError(listAll.error));
@@ -63,7 +63,7 @@ const Leave: React.FC = (): JSX.Element => {
     // setdata list
     if (!!list && list?.data && list?.meta) {
       setLeaveList(list.data);
-      setErrorMessageList("");
+      setErrorMessageList('');
     } else if (!!list && list?.error) {
       setLeaveList([]);
       setErrorMessageList(utils.setMessageError(list.error));
@@ -81,19 +81,16 @@ const Leave: React.FC = (): JSX.Element => {
 
   const leave: ILeave[] = [
     {
-      type: "vacation_leave",
-      title: "Vacation Leave",
-      date: auth?.user?.vacationLeave
+      type: 'vacation_leave',
+      title: 'Vacation Leave'
     },
     {
-      type: "sick_leave",
-      title: "Sick Leave",
-      date: auth?.user?.sickLeave
+      type: 'sick_leave',
+      title: 'Sick Leave'
     },
     {
-      type: "personal_leave",
-      title: "Personal Leave",
-      date: auth?.user?.personalLeave
+      type: 'personal_leave',
+      title: 'Personal Leave'
     }
   ];
 
@@ -120,7 +117,6 @@ const Leave: React.FC = (): JSX.Element => {
                 <CardLeaveDayType
                   type={item.type}
                   title={item.title}
-                  date={item.date}
                   active={active}
                 />
               </div>
@@ -129,7 +125,7 @@ const Leave: React.FC = (): JSX.Element => {
       </div>
       <div className="grid grid-cols-2 grid-flow-col gap-4">
         <Container>
-          <div className="flex flex-col" style={{ minHeight: "600px" }}>
+          <div className="flex flex-col" style={{ minHeight: '600px' }}>
             <h1 className="text-2xl font-bold">{leaveDayType}</h1>
             <div className="mt-10 grow">
               {!!errorMessageList && errorMessageList.length > 0 && (
@@ -164,7 +160,7 @@ const Leave: React.FC = (): JSX.Element => {
         </Container>
         <Container>
           <h1 className="text-2xl font-bold">Calendar</h1>
-          <div className="block" style={{ height: "500px" }}>
+          <div className="block" style={{ height: '500px' }}>
             {!!errorMessageListAll && errorMessageListAll.length > 0 ? (
               <div className="flex justify-center text-rose-600">
                 {errorMessageListAll}

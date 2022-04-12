@@ -1,5 +1,6 @@
-import axios from "axios";
-import { baseURL } from "../constants/api";
+/* eslint-disable quotes */
+import axios from 'axios';
+import { baseURL } from '../constants/api';
 
 const http = axios.create({
   baseURL: baseURL,

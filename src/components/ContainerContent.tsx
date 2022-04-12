@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable quotes */
+import React from 'react';
 
 const Comp: React.FC = ({ children }): JSX.Element => {
   return (

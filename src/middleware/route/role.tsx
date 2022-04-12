@@ -1,7 +1,8 @@
-import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { IRoutes } from "../../constants/routes";
-import { IAllReducers } from "../../redux/store";
+/* eslint-disable quotes */
+import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { IRoutes } from '../../constants/routes';
+import { IAllReducers } from '../../redux/store';
 
 const Role = (props: IRoutes): JSX.Element | null => {
   const auth = useSelector((state: IAllReducers) => state.auth);

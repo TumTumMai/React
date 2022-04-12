@@ -1,8 +1,9 @@
-import { Routes, Route } from "react-router-dom";
-import Pages, { IRoutes } from "constants/routes";
-import MiddlewareRotue from "middleware/route";
-import Error from "pages/error";
-import Load from "components/Load";
+/* eslint-disable quotes */
+import { Routes, Route } from 'react-router-dom';
+import Pages, { IRoutes } from 'constants/routes';
+import MiddlewareRotue from 'middleware/route';
+import Error from 'pages/error';
+import Load from 'components/Load';
 
 const App = (): JSX.Element => {
   return (
@@ -21,7 +22,7 @@ const App = (): JSX.Element => {
               </Route>
             );
           })}
-        <Route path={"*"} element={<Error />} />
+        <Route path={'*'} element={<Error />} />
       </Routes>
     </div>
   );

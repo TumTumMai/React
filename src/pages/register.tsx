@@ -1,18 +1,19 @@
+/* eslint-disable quotes */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-len */
-import axios from "axios";
-import * as React from "react";
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import api from "../constants/api";
+import axios from 'axios';
+import * as React from 'react';
+import { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import api from '../constants/api';
 
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "redux/authReducers/action";
-import { IAllReducers } from "redux/store";
-import { LoadActionType } from "redux/loadReducers/type";
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from 'redux/authReducers/action';
+import { IAllReducers } from 'redux/store';
+import { LoadActionType } from 'redux/loadReducers/type';
 
 const Register: React.FunctionComponent = () => {
   const {
@@ -20,19 +21,19 @@ const Register: React.FunctionComponent = () => {
     handleSubmit,
     formState: { errors }
   } = useForm();
-  const [title, setTitle] = useState("");
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setlastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("");
-  const [identificationCard, setidentificationCard] = useState("");
+  const [title, setTitle] = useState('');
+  const [firstName, setfirstName] = useState('');
+  const [lastName, setlastName] = useState('');
+  const [address, setAddress] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [phoneNumber, setphoneNumber] = useState('');
+  const [identificationCard, setidentificationCard] = useState('');
   const dispatch = useDispatch();
 
-  const [buttoncolor] = useState("bg-blue-500");
+  const [buttoncolor] = useState('bg-blue-500');
   const auth = useSelector((state: IAllReducers) => state.auth);
 
-  if (auth.user?.title !== "-") {
+  if (auth.user?.title !== '-') {
     dispatch(logout());
   }
 
@@ -51,25 +52,25 @@ const Register: React.FunctionComponent = () => {
     axios
       .put(`${api.updateProfile}${auth.user?.id}`, registerInfo, {
         headers: {
-          Authorization: "Bearer " + auth.token
+          Authorization: 'Bearer ' + auth.token
         }
       })
 
       .then(() => {
-        alert("รอแอดมินอนุมัติ");
+        alert('รอแอดมินอนุมัติ');
 
         dispatch(logout());
       })
       .catch((res) => {
         console.log(res);
-        alert("Login Failure");
+        alert('Login Failure');
       });
   }
   setTimeout(() => {
     dispatch({ type: LoadActionType.LOADING_OFF });
   }, 100);
   const onSubmit: SubmitHandler<any> = () => {
-    console.log("aaaa");
+    console.log('aaaa');
     handleRegister();
   };
 
@@ -87,14 +88,14 @@ const Register: React.FunctionComponent = () => {
           <input
             className={
               errors.title
-                ? " shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                : " shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ? ' shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                : ' shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             }
-            {...register("title", {
-              required: "กรอกช่องนี้ด้วย",
+            {...register('title', {
+              required: 'กรอกช่องนี้ด้วย',
               pattern: {
                 value: /[A-Za-z,ก-๙]/,
-                message: "ห้ามกรอกตัวเลข"
+                message: 'ห้ามกรอกตัวเลข'
               }
             })}
             type="text"
@@ -106,14 +107,14 @@ const Register: React.FunctionComponent = () => {
           <input
             className={
               errors.firstName
-                ? " shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                : " shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ? ' shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                : ' shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             }
-            {...register("firstName", {
-              required: "กรอกช่องนี้ด้วย",
+            {...register('firstName', {
+              required: 'กรอกช่องนี้ด้วย',
               pattern: {
                 value: /[A-Za-z,ก-๙]/,
-                message: "ห้ามกรอกตัวเลข"
+                message: 'ห้ามกรอกตัวเลข'
               }
             })}
             type="text"
@@ -127,14 +128,14 @@ const Register: React.FunctionComponent = () => {
           <input
             className={
               errors.lastName
-                ? " shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                : " shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ? ' shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                : ' shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             }
-            {...register("lastName", {
-              required: "กรอกช่องนี้ด้วย",
+            {...register('lastName', {
+              required: 'กรอกช่องนี้ด้วย',
               pattern: {
                 value: /[A-Za-z,ก-๙]/,
-                message: "ห้ามกรอกตัวเลข"
+                message: 'ห้ามกรอกตัวเลข'
               }
             })}
             type="text"
@@ -148,10 +149,10 @@ const Register: React.FunctionComponent = () => {
           <textarea
             className={
               errors.address
-                ? " shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                : " shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ? ' shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                : ' shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             }
-            {...register("address", { required: "กรอกช่องนี้ด้วย" })}
+            {...register('address', { required: 'กรอกช่องนี้ด้วย' })}
             placeholder="ที่อยุ่"
             onChange={(e) => setAddress(e.target.value)}
             value={address}
@@ -162,14 +163,14 @@ const Register: React.FunctionComponent = () => {
           <input
             className={
               errors.phoneNumber
-                ? " shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                : " shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ? ' shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                : ' shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             }
-            {...register("phoneNumber", {
-              required: "กรอกช่องนี้ด้วย",
+            {...register('phoneNumber', {
+              required: 'กรอกช่องนี้ด้วย',
               pattern: {
                 value: /[0-9]/,
-                message: "กรอกด้วยตัวเลขเท่านั้น"
+                message: 'กรอกด้วยตัวเลขเท่านั้น'
               }
             })}
             type="text"
@@ -183,14 +184,14 @@ const Register: React.FunctionComponent = () => {
           <input
             className={
               errors.identificationCard
-                ? " shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                : " shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ? ' shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                : ' shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             }
-            {...register("identificationCard", {
-              required: "กรอกช่องนี้ด้วย",
+            {...register('identificationCard', {
+              required: 'กรอกช่องนี้ด้วย',
               pattern: {
                 value: /[A-Za-z,0-9]/,
-                message: "ห้ามกรอกภาษาไทย"
+                message: 'ห้ามกรอกภาษาไทย'
               }
             })}
             // className="shadow appearance-none border border-black rounded  py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -205,10 +206,10 @@ const Register: React.FunctionComponent = () => {
           <input
             className={
               errors.birthDate
-                ? " shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                : " shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ? ' shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                : ' shadow appearance-none border border-black rounded   py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             }
-            {...register("birthDate", { required: "กรอกช่องนี้ด้วย" })}
+            {...register('birthDate', { required: 'กรอกช่องนี้ด้วย' })}
             type="date"
             placeholder="วันเกิด"
             onChange={(e) => setBirthDate(e.target.value)}
@@ -223,8 +224,8 @@ const Register: React.FunctionComponent = () => {
             // onClick={() => handleRegister()}
             className={[
               buttoncolor,
-              "text-white font-bold py-2 px-4 rounded"
-            ].join(" ")}
+              'text-white font-bold py-2 px-4 rounded'
+            ].join(' ')}
           >
             ยืนยัน
           </button>

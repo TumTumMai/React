@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable quotes */
+import React from 'react';
 
 interface IProps {
   title: string;
@@ -10,7 +11,7 @@ const Modal: React.FC<IProps> = (props): JSX.Element => {
   return (
     <div
       className={`${
-        props.openModal ? "" : "hidden"
+        props.openModal ? '' : 'hidden'
       } flex overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0`}
     >
       <div className="relative m-auto px-4 w-full max-w-2xl h-full md:h-auto">

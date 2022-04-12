@@ -43,6 +43,10 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "leaveDetails"
+    },
+    "leaveDays": {
+      "type": "integer",
+      "required": false
     }
   }
 }

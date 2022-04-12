@@ -13,6 +13,9 @@ export interface Attributes {
   publishedAt: Date;
   Holidays: IHolidayData[];
 }
+export interface IParams {
+  token?: string;
+}
 export interface ICalendaData {
   title: string;
   start: Date;

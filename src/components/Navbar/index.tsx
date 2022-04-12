@@ -1,9 +1,10 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "redux/authReducers/action";
-import Pages, { IRoutes } from "constants/routes";
-import { Menu, MenuLogOut } from "./Menu";
-import { IAllReducers } from "redux/store";
+/* eslint-disable quotes */
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from 'redux/authReducers/action';
+import Pages, { IRoutes } from 'constants/routes';
+import { Menu, MenuLogOut } from './Menu';
+import { IAllReducers } from 'redux/store';
 
 const Navbar: React.FC = ({ children }): JSX.Element => {
   const dispatch = useDispatch();
