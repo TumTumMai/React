@@ -1,0 +1,125 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::holiday-detail.holiday-detail",
+  "value": {
+    "uid": "api::holiday-detail.holiday-detail",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "id",
+      "defaultSortBy": "id",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Start_holiday_year": {
+        "edit": {
+          "label": "Start_holiday_year",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Start_holiday_year",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "End_holiday_year": {
+        "edit": {
+          "label": "End_holiday_year",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "End_holiday_year",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Holidays": {
+        "edit": {
+          "label": "Holidays",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Holidays",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "Start_holiday_year",
+        "End_holiday_year",
+        "Holidays"
+      ],
+      "editRelations": [],
+      "edit": [
+        [
+          {
+            "name": "Start_holiday_year",
+            "size": 4
+          },
+          {
+            "name": "End_holiday_year",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "Holidays",
+            "size": 12
+          }
+        ]
+      ]
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

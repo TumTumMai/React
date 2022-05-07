@@ -1,33 +1,6 @@
-# 🚀 Getting started with Strapi Plugin Example
+# 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
-
-### `Docker`
-
-To using docker, It requires **docker** and **docker-compse**.
-Setup your environment. This project using **Postgresql** for database.
-
-```
-npm run stack:up
-# or
-yarn stack:up
-```
-
-To stop the processes using
-
-```
-npm run stack:down
-# or
-yarn stack:down
-```
-
-To clear the prcesses using
-
-```
-npm run stack:clear
-# or
-yarn stack:clear
-```
 
 ### `develop`
 
@@ -57,16 +30,6 @@ Build your admin panel. [Learn more](https://docs.strapi.io/developer-docs/lates
 npm run build
 # or
 yarn build
-```
-
-### `New plugin`
-
-You can new plugin by Strapi cli and following thier instruction.
-
-```
-npm run generate
-# or
-yarn generate
 ```
 
 ## ⚙️ Deployment

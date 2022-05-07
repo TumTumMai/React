@@ -1,0 +1,46 @@
+{
+  "name": "Member",
+  "description": "Member",
+  "type": "member",
+  "permissions": [
+    {
+      "action": "api::holiday-detail.holiday-detail.find"
+    },
+    {
+      "action": "api::holiday-detail.holiday-detail.findOne"
+    },
+    {
+      "action": "api::leave-detail.leave-detail.allSum"
+    },
+    {
+      "action": "api::leave-detail.leave-detail.create"
+    },
+    {
+      "action": "api::leave-detail.leave-detail.delete"
+    },
+    {
+      "action": "api::leave-detail.leave-detail.find"
+    },
+    {
+      "action": "api::leave-detail.leave-detail.findOne"
+    },
+    {
+      "action": "api::leave-detail.leave-detail.sum"
+    },
+    {
+      "action": "api::leave-detail.leave-detail.update"
+    },
+    {
+      "action": "plugin::users-permissions.user.find"
+    },
+    {
+      "action": "plugin::users-permissions.user.findOne"
+    },
+    {
+      "action": "plugin::users-permissions.user.me"
+    },
+    {
+      "action": "plugin::users-permissions.user.update"
+    }
+  ]
+}

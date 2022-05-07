@@ -1,0 +1,98 @@
+{
+  "key": "plugin_content_manager_configuration_components::holidays.holiday",
+  "value": {
+    "uid": "holidays.holiday",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "title",
+      "defaultSortBy": "title",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "title",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "Start_holiday_year": {
+        "edit": {
+          "label": "Start_holiday_year",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Start_holiday_year",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "End_holiday_year": {
+        "edit": {
+          "label": "End_holiday_year",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "End_holiday_year",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "title",
+        "Start_holiday_year",
+        "End_holiday_year"
+      ],
+      "edit": [
+        [
+          {
+            "name": "title",
+            "size": 6
+          },
+          {
+            "name": "Start_holiday_year",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "End_holiday_year",
+            "size": 4
+          }
+        ]
+      ],
+      "editRelations": []
+    },
+    "isComponent": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

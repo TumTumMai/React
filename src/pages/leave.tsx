@@ -32,6 +32,7 @@ const Leave: React.FC = (): JSX.Element => {
 
   const dispatch = useDispatch();
   const auth = useSelector((state: IAllReducers) => state.auth);
+  console.log(auth);
 
   const getLeaveDate = async (): Promise<void> => {
     dispatch({ type: LoadActionType.LOADING_ON });

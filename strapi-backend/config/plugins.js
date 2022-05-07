@@ -7,17 +7,13 @@ module.exports = ({ env }) => ({
     },
   },
   // Leave report page;
-  "my-plugin": {
+  "leavereport-plugin": {
     enabled: true,
     resolve: "./src/plugins/leavereport",
   },
-  // provider for development
-  // upload: {
-  //   config: {
-  //     provider: "development",
-  //     providerOptions: {
-  //       urlHostName: env("HOST_NAME"),
-  //     },
-  //   },
-  // },
+  "test-plugin": {
+    enabled: true,
+    resolve: "./src/plugins/my-plugin",
+  },
+
 });
